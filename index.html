@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Encuentro de los Remedios - Foro de Salud Natural</title>
     <!-- Fuentes naturales -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=MedievalSharp&family=Unna:ital@0;1&display=swap" rel="stylesheet">
-    <!-- Google Identity Services -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Unna:ital@0;1&display=swap" rel="stylesheet">
     <style>
         /* Variables de colores y fuentes */
         :root {
@@ -47,8 +45,13 @@
             font-family: 'Cinzel Decorative', cursive;
         }
 
-        .quote-text, .comment-content {
-            font-family: 'MedievalSharp', cursive;
+        .quote-text {
+            font-family: 'Merriweather', serif;
+            font-weight: 300;
+        }
+
+        .comment-content {
+            font-family: 'Unna', serif;
         }
 
         /* Animación de fondo */
@@ -415,8 +418,30 @@
             text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
         }
 
-        #googleSignIn {
+        .google-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: white;
+            color: #757575;
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             margin: 10px 0;
+        }
+
+        .google-btn:hover {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .google-btn img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
         }
 
         .user-info {
@@ -643,7 +668,10 @@
                         <p>Regístrate con Google para tener un perfil permanente y recibir notificaciones.</p>
                         
                         <!-- Botón de Google Sign-In -->
-                        <div id="googleSignIn"></div>
+                        <button class="google-btn" id="googleSignIn">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=" alt="Google">
+                            Registrarse con Google
+                        </button>
                         
                         <!-- Información del usuario después del login -->
                         <div id="userInfo" class="user-info" style="display: none;">
@@ -657,37 +685,7 @@
                 <div class="comments-list">
                     <h3>Experiencias Compartidas</h3>
                     <div id="commentsContainer">
-                        <!-- Los comentarios se cargarán aquí dinámicamente -->
-                        <div class="comment">
-                            <div class="comment-header">
-                                <span class="comment-author">María González</span>
-                                <span class="comment-date">15 de Mayo, 2023</span>
-                            </div>
-                            <div class="comment-content">
-                                <strong>Infusión de jengibre para la digestión</strong><br>
-                                Llevo años tomando una infusión de jengibre fresco después de las comidas pesadas. Simplemente corto unas rodajas de jengibre, las hiervo por 10 minutos y añado un poco de miel. Me ha ayudado enormemente con la indigestión y los gases.
-                            </div>
-                        </div>
-                        <div class="comment">
-                            <div class="comment-header">
-                                <span class="comment-author">Javier Romero</span>
-                                <span class="comment-date">2 de Abril, 2023</span>
-                            </div>
-                            <div class="comment-content">
-                                <strong>Baños de pies con sal marina</strong><br>
-                                Para aliviar el cansancio y la hinchazón de pies, preparo baños con agua tibia y sal marina. Me relaja enormemente y reduce la inflamación. Lo recomiendo especialmente para quienes pasan mucho tiempo de pie.
-                            </div>
-                        </div>
-                        <div class="comment">
-                            <div class="comment-header">
-                                <span class="comment-author">Ana López</span>
-                                <span class="comment-date">20 de Marzo, 2023</span>
-                            </div>
-                            <div class="comment-content">
-                                <strong>Miel con ajo para el resfriado</strong><br>
-                                Mi abuela me enseñó este remedio: machacar un diente de ajo y mezclarlo con una cucharada de miel. Tomar esto dos veces al día al primer síntoma de resfriado. A mí me funciona mejor que cualquier medicamento.
-                            </div>
-                        </div>
+                        <!-- Los comentarios se cargarán aquí dinámicamente desde localStorage -->
                     </div>
                 </div>
             </div>
@@ -749,6 +747,51 @@
             }
         }
 
+        // Cargar comentarios desde localStorage
+        function loadComments() {
+            const commentsContainer = document.getElementById('commentsContainer');
+            const savedComments = localStorage.getItem('forumComments');
+            
+            if (savedComments) {
+                const comments = JSON.parse(savedComments);
+                commentsContainer.innerHTML = '';
+                
+                comments.forEach(comment => {
+                    addCommentToDOM(comment.author, comment.title, comment.content, comment.date);
+                });
+            } else {
+                // Si no hay comentarios guardados, mostrar algunos ejemplos iniciales
+                const initialComments = [
+                    {
+                        author: "María González",
+                        title: "Infusión de jengibre para la digestión",
+                        content: "Llevo años tomando una infusión de jengibre fresco después de las comidas pesadas. Simplemente corto unas rodajas de jengibre, las hiervo por 10 minutos y añado un poco de miel. Me ha ayudado enormemente con la indigestión y los gases.",
+                        date: "15 de Mayo, 2023"
+                    },
+                    {
+                        author: "Javier Romero",
+                        title: "Baños de pies con sal marina",
+                        content: "Para aliviar el cansancio y la hinchazón de pies, preparo baños con agua tibia y sal marina. Me relaja enormemente y reduce la inflamación. Lo recomiendo especialmente para quienes pasan mucho tiempo de pie.",
+                        date: "2 de Abril, 2023"
+                    },
+                    {
+                        author: "Ana López",
+                        title: "Miel con ajo para el resfriado",
+                        content: "Mi abuela me enseñó este remedio: machacar un diente de ajo y mezclarlo con una cucharada de miel. Tomar esto dos veces al día al primer síntoma de resfriado. A mí me funciona mejor que cualquier medicamento.",
+                        date: "20 de Marzo, 2023"
+                    }
+                ];
+                
+                // Guardar comentarios iniciales
+                localStorage.setItem('forumComments', JSON.stringify(initialComments));
+                
+                // Mostrar comentarios iniciales
+                initialComments.forEach(comment => {
+                    addCommentToDOM(comment.author, comment.title, comment.content, comment.date);
+                });
+            }
+        }
+
         // Manejar el formulario de comentarios
         document.getElementById('commentForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -767,17 +810,36 @@
 
         // Añadir un nuevo comentario
         function addComment(author, title, content) {
+            const date = new Date();
+            const formattedDate = `${date.getDate()} de ${getMonthName(date.getMonth())}, ${date.getFullYear()}`;
+            
+            // Guardar en localStorage
+            const savedComments = localStorage.getItem('forumComments');
+            const comments = savedComments ? JSON.parse(savedComments) : [];
+            
+            comments.unshift({
+                author: author,
+                title: title,
+                content: content,
+                date: formattedDate
+            });
+            
+            localStorage.setItem('forumComments', JSON.stringify(comments));
+            
+            // Añadir al DOM
+            addCommentToDOM(author, title, content, formattedDate);
+        }
+
+        // Añadir comentario al DOM
+        function addCommentToDOM(author, title, content, date) {
             const commentsContainer = document.getElementById('commentsContainer');
             const commentDiv = document.createElement('div');
             commentDiv.classList.add('comment');
             
-            const date = new Date();
-            const formattedDate = `${date.getDate()} de ${getMonthName(date.getMonth())}, ${date.getFullYear()}`;
-            
             commentDiv.innerHTML = `
                 <div class="comment-header">
                     <span class="comment-author">${author}</span>
-                    <span class="comment-date">${formattedDate}</span>
+                    <span class="comment-date">${date}</span>
                 </div>
                 <div class="comment-content">
                     <strong>${title}</strong><br>
@@ -798,82 +860,36 @@
             return months[monthIndex];
         }
 
-        // Configuración de Google Sign-In
-        function initializeGoogleSignIn() {
-            google.accounts.id.initialize({
-                client_id: "TU_CLIENT_ID_AQUI", // Reemplaza con tu Client ID real
-                callback: handleCredentialResponse,
-                auto_select: false,
-                cancel_on_tap_outside: true,
-            });
+        // Simulación de autenticación con Google (sin necesidad de configuración)
+        document.getElementById('googleSignIn').addEventListener('click', function() {
+            // Simular proceso de autenticación
+            const userName = prompt("Para una implementación real, esto conectaría con Google OAuth. Por favor, ingresa tu nombre para simular el registro:");
             
-            google.accounts.id.renderButton(
-                document.getElementById("googleSignIn"),
-                { 
-                    theme: "outline", 
-                    size: "large",
-                    width: "280",
-                    text: "continue_with",
-                    shape: "rectangular"
-                }
-            );
-            
-            google.accounts.id.prompt();
-        }
-
-        // Manejar la respuesta de autenticación de Google
-        function handleCredentialResponse(response) {
-            // Decodificar el token JWT para obtener la información del usuario
-            const responsePayload = parseJwt(response.credential);
-            
-            // Mostrar información del usuario
-            document.getElementById("userName").textContent = responsePayload.name;
-            document.getElementById("userInfo").style.display = "block";
-            document.getElementById("googleSignIn").style.display = "none";
-            
-            // Prellenar el nombre en el formulario de comentarios
-            document.getElementById("authorName").value = responsePayload.name;
-            
-            console.log("Usuario autenticado:", responsePayload);
-        }
-
-        // Función para decodificar el token JWT
-        function parseJwt(token) {
-            try {
-                const base64Url = token.split('.')[1];
-                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-                const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-                }).join(''));
+            if (userName) {
+                document.getElementById("userName").textContent = userName;
+                document.getElementById("userInfo").style.display = "block";
+                document.getElementById("googleSignIn").style.display = "none";
                 
-                return JSON.parse(jsonPayload);
-            } catch (e) {
-                console.error("Error al decodificar el token JWT:", e);
-                return {};
+                // Prellenar el nombre en el formulario de comentarios
+                document.getElementById("authorName").value = userName;
+                
+                alert(`¡Bienvenido/a ${userName}! Has sido registrado/a exitosamente.`);
             }
-        }
+        });
 
         // Cerrar sesión
         document.getElementById("signOut").addEventListener("click", function() {
-            google.accounts.id.disableAutoSelect();
             document.getElementById("userInfo").style.display = "none";
             document.getElementById("googleSignIn").style.display = "block";
             document.getElementById("authorName").value = "";
             
-            console.log("Sesión cerrada");
+            alert("Has cerrado sesión correctamente.");
         });
 
         // Inicializar la página
         document.addEventListener('DOMContentLoaded', function() {
             createBackgroundElements();
-            
-            // Inicializar Google Sign-In cuando esté disponible
-            if (typeof google !== 'undefined') {
-                initializeGoogleSignIn();
-            } else {
-                // Reintentar después de un tiempo si Google no está disponible
-                setTimeout(initializeGoogleSignIn, 1000);
-            }
+            loadComments();
         });
     </script>
 </body>
