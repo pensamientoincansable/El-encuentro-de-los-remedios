@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Encuentro de los Remedios - Foro de Salud Natural</title>
-    <!-- Nuevas fuentes más atractivas -->
+    <!-- Fuentes atractivas -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -46,6 +46,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 clamp(1rem, 4vw, 2rem);
+            width: 100%;
         }
 
         /* Nueva tipografía más atractiva */
@@ -780,6 +781,21 @@
             color: #aaa;
         }
 
+        /* Mejoras de márgenes para vista de ordenador en móviles */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+            }
+            
+            .welcome-section,
+            .quotes-section,
+            .forum-section,
+            .studies-section {
+                margin-left: 0.5rem;
+                margin-right: 0.5rem;
+            }
+        }
+
         /* Responsive para móviles */
         @media (max-width: 768px) {
             .logo-small {
@@ -1038,7 +1054,7 @@
                 <div class="footer-section">
                     <h3>Contacto</h3>
                     <p>info@encuentrodelosremedios.com</p>
-                    <p>+34 912 345 678</p>
+                    <!-- Teléfono eliminado según solicitud -->
                 </div>
             </div>
             <div class="footer-bottom">
@@ -1142,7 +1158,8 @@
         // Añadir un nuevo comentario
         function addComment(author, title, content) {
             const date = new Date();
-            const formattedDate = `${date.getDate()} de ${getMonthName(date.getMonth())}, ${date.getFullYear()}`;
+            // Forzar el año 2025
+            const formattedDate = `${date.getDate()} de ${getMonthName(date.getMonth())}, 2025`;
             
             // Guardar en localStorage
             const savedComments = localStorage.getItem('forumComments');
