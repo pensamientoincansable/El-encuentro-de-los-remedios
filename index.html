@@ -1094,8 +1094,37 @@
             }
         }
 
+        // Función para actualizar fechas a 2025 en comentarios existentes
+        function updateCommentsTo2025() {
+            const savedComments = localStorage.getItem('forumComments');
+            if (savedComments) {
+                const comments = JSON.parse(savedComments);
+                let updated = false;
+                
+                // Actualizar cualquier comentario que no sea de 2025
+                comments.forEach(comment => {
+                    if (!comment.date.includes('2025')) {
+                        // Extraer día y mes de la fecha existente
+                        const dateParts = comment.date.split(' de ');
+                        if (dateParts.length >= 2) {
+                            const dayMonth = `${dateParts[0]} de ${dateParts[1]}`;
+                            comment.date = `${dayMonth}, 2025`;
+                            updated = true;
+                        }
+                    }
+                });
+                
+                if (updated) {
+                    localStorage.setItem('forumComments', JSON.stringify(comments));
+                }
+            }
+        }
+
         // Cargar comentarios desde localStorage
         function loadComments() {
+            // Primero, actualizar cualquier comentario existente a 2025
+            updateCommentsTo2025();
+            
             const commentsContainer = document.getElementById('commentsContainer');
             const savedComments = localStorage.getItem('forumComments');
             
@@ -1104,6 +1133,14 @@
                 commentsContainer.innerHTML = '';
                 
                 comments.forEach(comment => {
+                    // Asegurar que la fecha sea 2025
+                    if (!comment.date.includes('2025')) {
+                        const dateParts = comment.date.split(' de ');
+                        if (dateParts.length >= 2) {
+                            const dayMonth = `${dateParts[0]} de ${dateParts[1].replace(', 2023', '').replace(', 2024', '')}`;
+                            comment.date = `${dayMonth}, 2025`;
+                        }
+                    }
                     addCommentToDOM(comment.author, comment.title, comment.content, comment.date);
                 });
             } else {
@@ -1158,7 +1195,7 @@
         // Añadir un nuevo comentario
         function addComment(author, title, content) {
             const date = new Date();
-            // Forzar el año 2025
+            // Forzar siempre el año 2025
             const formattedDate = `${date.getDate()} de ${getMonthName(date.getMonth())}, 2025`;
             
             // Guardar en localStorage
@@ -1184,10 +1221,20 @@
             const commentDiv = document.createElement('div');
             commentDiv.classList.add('comment');
             
+            // Asegurar que la fecha mostrada sea 2025
+            let displayDate = date;
+            if (!date.includes('2025')) {
+                const dateParts = date.split(' de ');
+                if (dateParts.length >= 2) {
+                    const dayMonth = `${dateParts[0]} de ${dateParts[1].replace(', 2023', '').replace(', 2024', '')}`;
+                    displayDate = `${dayMonth}, 2025`;
+                }
+            }
+            
             commentDiv.innerHTML = `
                 <div class="comment-header">
                     <span class="comment-author">${author}</span>
-                    <span class="comment-date">${date}</span>
+                    <span class="comment-date">${displayDate}</span>
                 </div>
                 <div class="comment-content">
                     <strong>${title}</strong><br>
