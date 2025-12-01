@@ -299,11 +299,11 @@
             transition: var(--transition);
         }
 
-        /* Sección de bienvenida responsive */
+        /* Sección de bienvenida responsive CON 75% DE TRANSPARENCIA */
         .welcome-section {
             padding: var(--section-spacing) 0;
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.75); /* 75% de transparencia */
             margin: clamp(1.5rem, 4vw, 3rem) 0;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
@@ -380,8 +380,9 @@
             gap: clamp(1.5rem, 3vw, 2.5rem);
         }
 
+        /* Tarjeta de frase con 75% de transparencia */
         .quote-card {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.75); /* 75% de transparencia */
             padding: clamp(1.5rem, 3vw, 2.5rem);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
@@ -448,9 +449,9 @@
             }
         }
 
-        /* Formulario de comentarios responsive */
+        /* Formulario de comentarios con 75% de transparencia */
         .comment-form {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.75); /* 75% de transparencia */
             padding: clamp(1.5rem, 3vw, 2.5rem);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
@@ -521,9 +522,9 @@
             }
         }
 
-        /* Autenticación con Google responsive */
+        /* Autenticación con Google con 75% de transparencia */
         .auth-section {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.75); /* 75% de transparencia */
             padding: clamp(1.5rem, 3vw, 2.5rem);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
@@ -582,9 +583,9 @@
             vertical-align: middle;
         }
 
-        /* Lista de comentarios responsive */
+        /* Lista de comentarios con 75% de transparencia */
         .comments-list {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.75); /* 75% de transparencia */
             padding: clamp(1.5rem, 3vw, 2.5rem);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
@@ -674,8 +675,9 @@
             gap: clamp(1.5rem, 3vw, 2.5rem);
         }
 
+        /* Tarjeta de estudio con 75% de transparencia */
         .study-card {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.75); /* 75% de transparencia */
             padding: clamp(1.5rem, 3vw, 2.5rem);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
@@ -1094,23 +1096,31 @@
             }
         }
 
-        // Función para actualizar fechas a 2025 en comentarios existentes
-        function updateCommentsTo2025() {
+        // Función para limpiar fechas - ELIMINAR 2023 Y DEJAR SOLO 2025
+        function cleanDates() {
             const savedComments = localStorage.getItem('forumComments');
             if (savedComments) {
                 const comments = JSON.parse(savedComments);
                 let updated = false;
                 
-                // Actualizar cualquier comentario que no sea de 2025
                 comments.forEach(comment => {
-                    if (!comment.date.includes('2025')) {
-                        // Extraer día y mes de la fecha existente
-                        const dateParts = comment.date.split(' de ');
-                        if (dateParts.length >= 2) {
-                            const dayMonth = `${dateParts[0]} de ${dateParts[1]}`;
-                            comment.date = `${dayMonth}, 2025`;
-                            updated = true;
+                    // Limpiar cualquier rastro de 2023, 2024 y asegurar que solo quede 2025
+                    if (comment.date.includes('2023')) {
+                        // Reemplazar cualquier combinación con 2023
+                        comment.date = comment.date.replace(', 2023', '').replace('2023, ', '').replace('2023', '');
+                        // Asegurar que termine con , 2025
+                        if (!comment.date.includes('2025')) {
+                            comment.date = comment.date + ', 2025';
                         }
+                        updated = true;
+                    }
+                    // También limpiar 2024 si existe
+                    if (comment.date.includes('2024')) {
+                        comment.date = comment.date.replace(', 2024', '').replace('2024, ', '').replace('2024', '');
+                        if (!comment.date.includes('2025')) {
+                            comment.date = comment.date + ', 2025';
+                        }
+                        updated = true;
                     }
                 });
                 
@@ -1122,8 +1132,8 @@
 
         // Cargar comentarios desde localStorage
         function loadComments() {
-            // Primero, actualizar cualquier comentario existente a 2025
-            updateCommentsTo2025();
+            // Primero, limpiar las fechas
+            cleanDates();
             
             const commentsContainer = document.getElementById('commentsContainer');
             const savedComments = localStorage.getItem('forumComments');
@@ -1133,18 +1143,23 @@
                 commentsContainer.innerHTML = '';
                 
                 comments.forEach(comment => {
-                    // Asegurar que la fecha sea 2025
-                    if (!comment.date.includes('2025')) {
-                        const dateParts = comment.date.split(' de ');
-                        if (dateParts.length >= 2) {
-                            const dayMonth = `${dateParts[0]} de ${dateParts[1].replace(', 2023', '').replace(', 2024', '')}`;
-                            comment.date = `${dayMonth}, 2025`;
-                        }
+                    // Asegurar que la fecha solo muestre 2025
+                    let displayDate = comment.date;
+                    // Limpiar cualquier año que no sea 2025
+                    if (displayDate.includes('2023')) {
+                        displayDate = displayDate.replace(', 2023', '').replace('2023, ', '').replace('2023', '');
                     }
-                    addCommentToDOM(comment.author, comment.title, comment.content, comment.date);
+                    if (displayDate.includes('2024')) {
+                        displayDate = displayDate.replace(', 2024', '').replace('2024, ', '').replace('2024', '');
+                    }
+                    // Asegurar que termine con , 2025
+                    if (!displayDate.includes('2025')) {
+                        displayDate = displayDate + ', 2025';
+                    }
+                    addCommentToDOM(comment.author, comment.title, comment.content, displayDate);
                 });
             } else {
-                // Si no hay comentarios guardados, mostrar algunos ejemplos iniciales con fechas actualizadas a 2025
+                // Si no hay comentarios guardados, mostrar algunos ejemplos iniciales SOLO CON 2025
                 const initialComments = [
                     {
                         author: "María González",
@@ -1221,14 +1236,18 @@
             const commentDiv = document.createElement('div');
             commentDiv.classList.add('comment');
             
-            // Asegurar que la fecha mostrada sea 2025
+            // Asegurar que la fecha solo muestre 2025
             let displayDate = date;
-            if (!date.includes('2025')) {
-                const dateParts = date.split(' de ');
-                if (dateParts.length >= 2) {
-                    const dayMonth = `${dateParts[0]} de ${dateParts[1].replace(', 2023', '').replace(', 2024', '')}`;
-                    displayDate = `${dayMonth}, 2025`;
-                }
+            // Limpiar cualquier año que no sea 2025
+            if (displayDate.includes('2023')) {
+                displayDate = displayDate.replace(', 2023', '').replace('2023, ', '').replace('2023', '');
+            }
+            if (displayDate.includes('2024')) {
+                displayDate = displayDate.replace(', 2024', '').replace('2024, ', '').replace('2024', '');
+            }
+            // Asegurar que termine con , 2025
+            if (!displayDate.includes('2025')) {
+                displayDate = displayDate + ', 2025';
             }
             
             commentDiv.innerHTML = `
