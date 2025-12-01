@@ -21,6 +21,8 @@
             --transition: all 0.3s ease;
             --border-radius: 12px;
             --section-spacing: clamp(3rem, 8vw, 6rem);
+            --forest-green: #2d5a27;
+            --vanilla: #f3e5ab;
         }
 
         /* Reset y estilos base */
@@ -175,9 +177,12 @@
             }
         }
 
-        /* Cabecera renovada */
+        /* Cabecera renovada CON FONDO DE PLANTAS MEDICINALES */
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: 
+                linear-gradient(135deg, rgba(42, 125, 46, 0.9), rgba(74, 156, 90, 0.9)),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" opacity="0.3"><path d="M100,350 C150,300 200,320 250,350 C300,380 350,370 400,350 C450,330 500,340 550,350 C600,360 650,350 700,330 C750,310 800,320 850,350 C900,380 950,370 1000,350 C1050,330 1100,340 1150,350" fill="none" stroke="%23ffffff" stroke-width="4"/><path d="M150,250 C180,220 220,230 250,250 C280,270 320,260 350,240 C380,220 420,230 450,250" fill="none" stroke="%23ffffff" stroke-width="3"/><path d="M300,200 C330,180 360,190 390,200 C420,210 450,200 480,180 C510,160 540,170 570,190" fill="none" stroke="%23ffffff" stroke-width="3"/><circle cx="200" cy="150" r="15" fill="%23ffffff" opacity="0.6"/><circle cx="500" cy="100" r="12" fill="%23ffffff" opacity="0.6"/><circle cx="800" cy="180" r="10" fill="%23ffffff" opacity="0.6"/><circle cx="1000" cy="120" r="14" fill="%23ffffff" opacity="0.6"/></svg>');
+            background-size: cover, auto;
             color: white;
             padding: clamp(2rem, 6vw, 4rem) 0;
             text-align: center;
@@ -738,6 +743,102 @@
             font-size: 0.9rem;
         }
 
+        /* NUEVA SECCIÓN RECETARIO */
+        .recipe-section {
+            padding: var(--section-spacing) 0;
+            background: linear-gradient(135deg, rgba(45, 90, 39, 0.05), rgba(74, 156, 90, 0.05));
+            margin: clamp(1.5rem, 4vw, 3rem) 0;
+            border-radius: var(--border-radius);
+        }
+
+        .recipe-section h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .recipe-form {
+            background-color: rgba(255, 255, 255, 0.75);
+            padding: clamp(1.5rem, 3vw, 2.5rem);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: clamp(1.5rem, 4vw, 3rem);
+            border: 1px solid #e8e8e8;
+        }
+
+        .recipe-form h3 {
+            color: var(--primary-color);
+            margin-bottom: clamp(1.2rem, 3vw, 2rem);
+            font-size: clamp(1.3rem, 3vw, 1.7rem);
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+        }
+
+        .recipe-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: clamp(1.5rem, 3vw, 2.5rem);
+        }
+
+        /* Cajones desplegables de recetas */
+        .recipe-drawer {
+            margin-bottom: 1.5rem;
+        }
+
+        .recipe-drawer summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 1.2rem 1.5rem;
+            background-color: var(--forest-green);
+            color: var(--vanilla);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .recipe-drawer summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .recipe-drawer summary::after {
+            content: "+";
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .recipe-drawer[open] summary::after {
+            content: "-";
+        }
+
+        .recipe-drawer summary:hover {
+            background-color: #24421f;
+            transform: translateY(-2px);
+        }
+
+        .recipe-drawer .drawer-content {
+            background-color: var(--forest-green);
+            color: var(--vanilla);
+            padding: 1.5rem;
+            border-radius: 0 0 8px 8px;
+            margin-top: -5px;
+            border-top: 2px solid rgba(243, 229, 171, 0.3);
+        }
+
+        .recipe-author {
+            font-style: italic;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(243, 229, 171, 0.2);
+            text-align: right;
+        }
+
         /* Pie de página responsive */
         footer {
             background-color: var(--dark-color);
@@ -792,7 +893,8 @@
             .welcome-section,
             .quotes-section,
             .forum-section,
-            .studies-section {
+            .studies-section,
+            .recipe-section {
                 margin-left: 0.5rem;
                 margin-right: 0.5rem;
             }
@@ -876,7 +978,7 @@
     <header>
         <div class="container">
             <h1 class="logo">El Encuentro de los Remedios</h1>
-            <p class="tagline">Un espacio para compartir experiencias, sabiduría ancestral y remedios naturales que nos han acompañado por generaciones</p>
+            <p class="tagline">Un espacio para compartir y preservar la sabiduría ancestral de experiencias con los remedios naturales que nos han acompañado durante generaciones.</p>
         </div>
     </header>
 
@@ -889,6 +991,7 @@
                 <li><a href="#quotes">Frases Célebres</a></li>
                 <li><a href="#forum">Foro</a></li>
                 <li><a href="#studies">Estudios Científicos</a></li>
+                <li><a href="#recipe-book">Recetario</a></li>
                 <li><a href="#about">Sobre Nosotros</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
@@ -978,7 +1081,7 @@
                         
                         <!-- Botón de Google Sign-In -->
                         <button class="google-btn" id="googleSignIn">
-                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=" alt="Google">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldZlbm9kZCI+PHBhdGggZD0iTTE3LjYgOS4ybC0uMS0xLjhIOXYzLjRoNC44QzEzLjYgMTIgMTMgMTMgMTIgMTMuNnYyLjJoM2E4LjggOC44IDAgMCAwIDIuNi02LjZ6IiBmaWxsPSIjNDI4NUY0IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAxOGMyLjQgMCA0LjUtLjggNi0yLjJsLTMtMi4yYTUuNCA1LjQgMCAwIDEtOC0yLjlIMVYxM2E5IDkgMCAwIDAgOCA1eiIgZmlsbD0iIzM0QTg1MyIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTQgMTAuN2E1LjQgNS40IDAgMCAxIDAtMy40VjVIMWE5IDkgMCAwIDAgMCA4bDMtMi4zeiIgZmlsbD0iI0ZCQkMwNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTkgMy42YzEuMyAwIDIuNS40IDMuNCAxLjNMMTUgMi4zQTkgOSAwIDAgMCAxIDVsMyAyLjRhNS40IDUuNCAwIDAgMSA1LTMuN3oiIGZpbGw9IiNFQTQzMzUiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik0wIDBoMTh2MThIMHoiLz48L2c+PC9zdmc+" alt="Google">
                             Registrarse con Google
                         </button>
                         
@@ -1036,6 +1139,36 @@
                 </div>
             </div>
         </section>
+
+        <!-- NUEVA SECCIÓN: Recetario -->
+        <section id="recipe-book" class="recipe-section">
+            <h2>Recetario de Remedios Naturales</h2>
+            
+            <!-- Formulario para agregar recetas -->
+            <div class="recipe-form">
+                <h3>Agrega tu Receta</h3>
+                <form id="recipeForm">
+                    <div class="form-group">
+                        <label for="recipeTitle">Título de la Receta</label>
+                        <input type="text" id="recipeTitle" required placeholder="Ej: Infusión de jengibre para la digestión">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipeAuthor">Tu Nombre</label>
+                        <input type="text" id="recipeAuthor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipeContent">Contenido de la Receta</label>
+                        <textarea id="recipeContent" rows="6" required placeholder="Describe los ingredientes y preparación..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Agregar Receta</button>
+                </form>
+            </div>
+
+            <!-- Contenedor de recetas -->
+            <div class="recipe-container" id="recipesContainer">
+                <!-- Las recetas se cargarán aquí dinámicamente -->
+            </div>
+        </section>
     </main>
 
     <!-- Pie de página -->
@@ -1052,6 +1185,7 @@
                     <p><a href="#quotes">Frases Célebres</a></p>
                     <p><a href="#forum">Foro</a></p>
                     <p><a href="#studies">Estudios Científicos</a></p>
+                    <p><a href="#recipe-book">Recetario</a></p>
                 </div>
                 <div class="footer-section">
                     <h3>Contacto</h3>
@@ -1274,6 +1408,122 @@
             return months[monthIndex];
         }
 
+        // FUNCIONES PARA EL RECETARIO
+        // Cargar recetas desde localStorage
+        function loadRecipes() {
+            const recipesContainer = document.getElementById('recipesContainer');
+            const savedRecipes = localStorage.getItem('forumRecipes');
+            
+            if (savedRecipes) {
+                const recipes = JSON.parse(savedRecipes);
+                recipesContainer.innerHTML = '';
+                
+                recipes.forEach(recipe => {
+                    addRecipeToDOM(recipe.title, recipe.author, recipe.content, recipe.date);
+                });
+            } else {
+                // Si no hay recetas guardadas, mostrar algunas iniciales
+                const initialRecipes = [
+                    {
+                        title: "Infusión Digestiva de Jengibre y Menta",
+                        author: "María González",
+                        content: "Ingredientes: 1 trozo de jengibre fresco (3cm), 5 hojas de menta fresca, 1 cucharadita de miel, 250ml de agua. Preparación: Pelar y cortar el jengibre en rodajas finas. Hervir el agua y añadir el jengibre, dejar hervir 5 minutos. Apagar el fuego y añadir las hojas de menta, tapar y dejar reposar 5 minutos. Colar y añadir miel al gusto. Tomar después de comidas pesadas.",
+                        date: "10 de Mayo, 2025"
+                    },
+                    {
+                        title: "Ungüento de Caléndula para la Piel",
+                        author: "Carlos Mendoza",
+                        content: "Ingredientes: 1 taza de flores de caléndula secas, 2 tazas de aceite de oliva virgen extra, 30g de cera de abejas. Preparación: Macerar las flores en el aceite por 4 semanas en un frasco de vidrio. Filtrar el aceite y calentar a baño maría con la cera de abejas hasta que se disuelva. Verter en recipientes limpios y dejar enfriar. Aplicar en irritaciones de la piel.",
+                        date: "25 de Abril, 2025"
+                    },
+                    {
+                        title: "Jarabe Natural para la Tos",
+                        author: "Ana López",
+                        content: "Ingredientes: 1 cebolla mediana, 3 dientes de ajo, 2 limones, 250ml de miel pura. Preparación: Picar finamente la cebolla y el ajo. Exprimir los limones. En un frasco de vidrio, alternar capas de cebolla/ajo y miel. Añadir el jugo de limón. Cerrar y dejar reposar 24 horas. Tomar una cucharada cada 4 horas durante los síntomas.",
+                        date: "5 de Marzo, 2025"
+                    }
+                ];
+                
+                // Guardar recetas iniciales
+                localStorage.setItem('forumRecipes', JSON.stringify(initialRecipes));
+                
+                // Mostrar recetas iniciales
+                initialRecipes.forEach(recipe => {
+                    addRecipeToDOM(recipe.title, recipe.author, recipe.content, recipe.date);
+                });
+            }
+        }
+
+        // Manejar el formulario de recetas
+        document.getElementById('recipeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const recipeTitle = document.getElementById('recipeTitle').value;
+            const recipeAuthor = document.getElementById('recipeAuthor').value;
+            const recipeContent = document.getElementById('recipeContent').value;
+            
+            if (recipeTitle && recipeAuthor && recipeContent) {
+                // Verificar que no exista una receta con el mismo título
+                const savedRecipes = localStorage.getItem('forumRecipes');
+                const recipes = savedRecipes ? JSON.parse(savedRecipes) : [];
+                
+                const existingRecipe = recipes.find(recipe => 
+                    recipe.title.toLowerCase() === recipeTitle.toLowerCase()
+                );
+                
+                if (existingRecipe) {
+                    alert("Ya existe una receta con ese título. Por favor, elige un título diferente.");
+                    return;
+                }
+                
+                addRecipe(recipeTitle, recipeAuthor, recipeContent);
+                
+                // Limpiar formulario
+                document.getElementById('recipeForm').reset();
+            }
+        });
+
+        // Añadir una nueva receta
+        function addRecipe(title, author, content) {
+            const date = new Date();
+            // Forzar siempre el año 2025
+            const formattedDate = `${date.getDate()} de ${getMonthName(date.getMonth())}, 2025`;
+            
+            // Guardar en localStorage
+            const savedRecipes = localStorage.getItem('forumRecipes');
+            const recipes = savedRecipes ? JSON.parse(savedRecipes) : [];
+            
+            recipes.unshift({
+                title: title,
+                author: author,
+                content: content,
+                date: formattedDate
+            });
+            
+            localStorage.setItem('forumRecipes', JSON.stringify(recipes));
+            
+            // Añadir al DOM
+            addRecipeToDOM(title, author, content, formattedDate);
+        }
+
+        // Añadir receta al DOM como cajón desplegable
+        function addRecipeToDOM(title, author, content, date) {
+            const recipesContainer = document.getElementById('recipesContainer');
+            const recipeDrawer = document.createElement('details');
+            recipeDrawer.classList.add('recipe-drawer');
+            
+            recipeDrawer.innerHTML = `
+                <summary>${title}</summary>
+                <div class="drawer-content">
+                    <p>${content.replace(/\n/g, '<br>')}</p>
+                    <div class="recipe-author">Publicado por ${author} - ${date}</div>
+                </div>
+            `;
+            
+            // Insertar al principio
+            recipesContainer.insertBefore(recipeDrawer, recipesContainer.firstChild);
+        }
+
         // Simulación de autenticación con Google (sin necesidad de configuración)
         document.getElementById('googleSignIn').addEventListener('click', function() {
             // Simular proceso de autenticación
@@ -1284,8 +1534,9 @@
                 document.getElementById("userInfo").style.display = "block";
                 document.getElementById("googleSignIn").style.display = "none";
                 
-                // Prellenar el nombre en el formulario de comentarios
+                // Prellenar el nombre en los formularios
                 document.getElementById("authorName").value = userName;
+                document.getElementById("recipeAuthor").value = userName;
                 
                 alert(`¡Bienvenido/a ${userName}! Has sido registrado/a exitosamente.`);
             }
@@ -1296,6 +1547,7 @@
             document.getElementById("userInfo").style.display = "none";
             document.getElementById("googleSignIn").style.display = "block";
             document.getElementById("authorName").value = "";
+            document.getElementById("recipeAuthor").value = "";
             
             alert("Has cerrado sesión correctamente.");
         });
@@ -1321,6 +1573,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             createBackgroundElements();
             loadComments();
+            loadRecipes();
         });
 
         // Optimización para cambio de tamaño de ventana
